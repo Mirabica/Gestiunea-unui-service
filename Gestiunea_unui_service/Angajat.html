@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angajat</title>
+<style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: "Arial Black", Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('Imagini/Angajati.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            width: 800px;
+            height: 600px;
+            position: relative;
+        }
+        .button {
+            position: absolute;
+            width: 182px;
+            height: 34px;
+            background-color: #8B008B;
+            border: none;
+            color: white;
+            font-size: 9px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+        }
+        .button:focus {
+            outline: none;
+        }
+        .button.programari {
+            left: 90px;
+            top: 16px;
+          font-size: 12px;
+width: 200px;
+        }
+        .button.lucrari {
+            left: 300px;
+            top: 16px;
+font-size: 12px;
+width: 200px;
+
+        }
+        .button.clienti {
+            left: 510px;
+            top: 16px;
+font-size: 12px;
+width: 200px;
+        }
+        .button.exit {
+            left: 800px;
+            bottom: 20px;
+            width: 80px;
+            font-size: 16px;
+            background-color: #FF0000;
+        }
+</style>
+</head>
+<body>
+<div class="container">
+<button class="button programari" onclick="viewProgramari()">VIZUALIZARE PROGRAMARI</button>
+<button class="button lucrari" onclick="viewLucrari()">VIZUALIZARE LUCRARI</button>
+<button class="button clienti" onclick="viewClienti()">VIZUALIZARE CLIENTI</button>
+<button class="button exit" onclick="exit()">EXIT</button>
+</div>
+<script>
+        function viewProgramari() {
+            window.location.href = 'Vizualizare_programari_angajat.html'; 
+        }
+ 
+        function viewLucrari() {
+            window.location.href = 'Vizualizare_lucrari_angajat.html'; 
+        }
+ 
+        function viewClienti() {
+            window.location.href = 'Vizualizare_clienti_angajat.html'; // Replace with actual URL or function
+        }
+ 
+        function exit() {
+            window.location.href='Login.html';
+        }
+</script>
+</body>
+</html>

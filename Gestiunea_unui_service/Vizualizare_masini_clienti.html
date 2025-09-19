@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vizualizare Masini</title>
+<style>
+    body {
+        font-family: 'Arial Black', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url('Imagini/Viz_mas.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+    .container {
+        width: 800px;
+        height: 600px;
+        margin: 0 auto;
+        position: relative;
+    }
+ .back-button, .vizualizare-button {
+            position: absolute;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+ .back-button {
+            bottom: 20px;
+            background-color: #FF1493;
+            color: black;
+            font-weight: bold;
+            right:-330px;
+        }
+
+    .vizualizare-button {
+        position: absolute;
+        top: 10px;
+        left: 300px;
+        background-color: transparent;
+        color: black;
+        font-size: 30px;
+        border: none;
+        cursor: pointer;
+    }
+    .input-group {
+        position: absolute;
+        top: 290px;
+        left: -160px;
+    }
+    .input-group label {
+        color: yellow;
+        font-size: 20px;
+    }
+    .input-group input {
+        width: 110px;
+        padding: 5px;
+        background-color: gray;
+        color: black;
+        border: 1px solid black;
+    }
+    .text-area {
+        position: absolute;
+        top: 70px;
+        left: -300px;
+        width: 500px;
+        height: 180px;
+        padding: 10px;
+        background-color: #FFFFCC;
+        border: none;
+        resize: none;
+        overflow-y: auto;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+ <button class="back-button" onclick="goBack()">BACK</button>
+<form id="searchForm">
+<div class="input-group">
+<label for="seriaVINField">Seria</label>
+<input type="text" id="seriaVINField" name="seriaVINField">
+</div>
+<button class="vizualizare-button" type="button" onclick="performSearch()">Vizualizare</button>
+</form>
+<textarea class="text-area" id="resultTextArea" readonly></textarea>
+</div>
+ 
+<script>
+
+function goBack() {
+            // Navighează înapoi în istoricul paginii
+            history.back();
+        }
+
+
+    function performSearch() {
+        const seriaVIN = document.getElementById('seriaVINField').value;
+ 
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'ScriptBdMasiniClienti.php', true); // Replace 'your_php_script.php' with the name of your PHP script
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const response = xhr.responseText;
+                const textArea = document.getElementById('resultTextArea');
+                textArea.value = response;
+            }
+        };
+ 
+        xhr.send(`seriaVINField=${encodeURIComponent(seriaVIN)}`);
+    }
+</script>
+ 
+</body>
+</html>

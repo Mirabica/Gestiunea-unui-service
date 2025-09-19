@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vizualizare Programari</title>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('Imagini/ang1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+        }
+        .button {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 30px;
+            color: white;
+            background-color: transparent;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            opacity: 0.9;
+            font-weight: bold;
+            position:absolute;
+        }
+        .button:hover {
+            opacity: 1;
+        }
+ 
+	.button:nth-child(1) {
+              left:100px;
+              top:30px;
+	}
+
+	.button:nth-child(2) {
+              left:460px;
+              top:30px;
+	}
+
+	.button:nth-child(3) {
+              left:820px;
+              top:30px;
+	}
+
+	.button:nth-child(4) {
+              left:1180px;
+              top:30px;
+	}
+        .button-small {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 14px;
+            color: black;
+            background-color: grey;
+            padding: 8px 10px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+        .input-field {
+            bottom:560px;
+            position:absolute;
+            width: 120px;
+            height: 20px;
+            margin: 5px;
+            padding: 5px;
+            border: 1px solid black;
+            background-color: grey;
+            color: black;
+        }
+        .label {
+	bottom:600px;
+            position:absolute;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 16px;
+            color: yellow;
+            margin: 5px;
+            display: inline-block;
+        }
+        .text-area {
+            position:absolute;
+            top: 300px;
+            width: 90%;
+            height: 290px;
+            background-color: #FFFFCC;
+            border: none;
+            padding: 10px;
+            box-sizing: border-box;
+            resize:none;
+            margin-top: 20px;
+            overflow-y: scroll;
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            width: 80%;
+        }
+        .input-group .field-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+        .buttons-group {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            margin-top: 20px;
+        }
+</style>
+</head>
+<body>
+<button class="button-small" id="backButton">BACK</button>
+<div class="buttons-group">
+<button class="button" id="vizualizareButton">Vizualizare</button>
+<button class="button" id="adaugaButton">Adaugare</button>
+<button class="button" id="stergeButton">Stergere</button>
+<button class="button" id="editareButton">Modificare</button>
+</div>
+<div class="input-group">
+<div class="field-group">
+<label class="label">Cod Prog</label>
+<input type="text" class="input-field" id="codprogField">
+</div>
+<div class="field-group">
+<label class="label">Cod Client</label>
+<input type="text" class="input-field" id="codcliField">
+</div>
+<div class="field-group">
+<label class="label">Cod Masina</label>
+<input type="text" class="input-field" id="codmField">
+</div>
+<div class="field-group">
+<label class="label">Data</label>
+<input type="text" class="input-field" id="dataField">
+</div>
+<div class="field-group">
+<label class="label">Ora</label>
+<input type="text" class="input-field" id="oraField">
+</div>
+</div>
+<textarea class="text-area" id="textArea" readonly></textarea>
+ 
+<script>
+document.getElementById('backButton').addEventListener('click', function() {
+    window.location.href = 'angajat.html'; // Navigate to Angajat page
+});
+
+document.getElementById('vizualizareButton').addEventListener('click', function() {
+    performOperation('search');
+});
+
+document.getElementById('adaugaButton').addEventListener('click', function() {
+    performOperation('insert');
+});
+
+document.getElementById('stergeButton').addEventListener('click', function() {
+    performOperation('delete');
+});
+
+document.getElementById('editareButton').addEventListener('click', function() {
+    performOperation('update');
+});
+
+function performOperation(operation) {
+    const codprogField = document.getElementById('codprogField').value;
+    const codcliField = document.getElementById('codcliField').value;
+    const codmField = document.getElementById('codmField').value;
+    const dataField = document.getElementById('dataField').value;
+    const oraField = document.getElementById('oraField').value;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'ScriptBDProgramariAngajat.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('textArea').value = xhr.responseText;
+        }
+    };
+
+    xhr.send(`operation=${operation}&codprog=${codprogField}&codcli=${codcliField}&codm=${codmField}&data=${dataField}&ora=${oraField}`);
+}
+</script>
+</body>
+</html>

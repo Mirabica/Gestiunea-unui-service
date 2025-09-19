@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raportul pretului in functie de data</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+</style>
+</head>
+<body>
+<h1>Raport pret-data</h1>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Total Cost</th>
+</tr>
+</thead>
+<tbody id="reportTable">
+<!-- Data will be inserted here -->
+</tbody>
+</table>
+ 
+    <script>
+        // Make an AJAX request to fetch the data from the PHP script
+        fetch('CalculCost.php')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);  // Log the data for debugging
+                var tableBody = document.getElementById('reportTable');
+                tableBody.innerHTML = '';  // Clear any existing rows
+ 
+                data.forEach((item, index) => {
+                    var row = document.createElement('tr');
+                    var dateCell = document.createElement('td');
+                    var costCell = document.createElement('td');
+ 
+                    dateCell.textContent = item.dataluc;
+                    costCell.textContent = item.totalCost + 'Lei';
+ 
+                    row.appendChild(dateCell);
+                    row.appendChild(costCell);
+ 
+                    // Apply different styling for the total row
+                    if (index === data.length - 1) {
+                        dateCell.style.fontWeight = 'bold';
+                        costCell.style.fontWeight = 'bold';
+                    }
+ 
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('reportTable').innerHTML = '<tr><td colspan="2">Error fetching data</td></tr>';
+            });
+</script>
+</body>
+</html>

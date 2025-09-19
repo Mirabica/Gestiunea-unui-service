@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clienti</title>
+    <style>
+        body {
+            background-image: url('Imagini/client1.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20vh;
+            margin: 0;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .button-container button {
+            width: 200px; /* Dimensiune fixă pentru lățime */
+            height: 35px; /* Dimensiune fixă pentru înălțime */
+            margin: 0 10px;
+            border: 1px solid black;
+            background-color: rgb(160, 82, 45);
+            color: white;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="clienti.php" method="post">
+            <div class="button-container">
+                <button type="submit" name="action" value="vizualizare_programari">VIZUALIZARE PROGRAMARI</button>
+                <button type="submit" name="action" value="vizualizare_masini">VIZUALIZARE MASINI</button>
+                <button type="submit" name="action" value="contact">CONTACT</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
